@@ -28,9 +28,13 @@ public class PersonControl {
     public Person createPerson(@RequestBody Person person) {
         return this.personService.createPerson(person);
     }
+    @PostMapping("update-person")
+    public Person updatePerson( @RequestBody Person person) {
+        return this.personService.updatePerson(person.getId(), person);
+    }
     @DeleteMapping("/remove-person")
     public String deletePerson(@RequestParam String id){
         return this.personService.deletePersonById(id);
-}
+   }
 }
 

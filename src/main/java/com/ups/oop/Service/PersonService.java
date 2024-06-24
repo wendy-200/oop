@@ -24,12 +24,23 @@ public class PersonService {
         for (Person per : personList){
            if(id.equalsIgnoreCase(per.getId())){
             return per;
-    }
+          }
         }
         return person;
     }
+     public Person updatePerson(String id, Person person) {
+        int index = 0;
+        for (Person pers : personList){
+            if(person.getId().equalsIgnoreCase(pers.getId())) {
+                personList.set(index, pers);
+                return person;
+            }
+            index++;
+        }
+        return new Person();
+     }
     public String deletePersonById(String id) {
-        String message = "Person with id " + id + " not found";
+        String message = "Person with id " + id;
         for (Person per : personList){
             if(id.equalsIgnoreCase(per.getId())){
                 personList.remove(per);
