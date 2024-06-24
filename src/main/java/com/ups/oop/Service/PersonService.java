@@ -28,7 +28,8 @@ public class PersonService {
         }
         return person;
     }
-     public Person updatePerson(String id, Person person) {
+     public Person updatePerson(Person person) {
+        Person per = new Person();
         int index = 0;
         for (Person pers : personList){
             if(person.getId().equalsIgnoreCase(pers.getId())) {
@@ -37,7 +38,7 @@ public class PersonService {
             }
             index++;
         }
-        return new Person();
+        return per;
      }
     public String deletePersonById(String id) {
         String message = "Person with id " + id;
