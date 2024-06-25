@@ -2,6 +2,9 @@ package com.ups.oop.controller;
 
 import com.ups.oop.dto.Person;
 import com.ups.oop.Service.PersonService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,17 +18,17 @@ public class PersonControl {
     }
 
     @GetMapping("/get-all-people")
-    public List<Person> getAllPeople() {
+    public ResponseEntity getAllPeople() {
         return this.personService.getAllPeople();
     }
 
     @GetMapping("/get-person")
-    public Person getPersonById(@RequestParam String id) {
+    public ResponseEntity getPersonById(@RequestParam String id) {
         return this.personService.getPersonById(id);
     }
 
     @PostMapping("/person")
-    public Person createPerson(@RequestBody Person person) {
+    public ResponseEntity createPerson(@RequestBody Person person) {
         return this.personService.createPerson(person);
     }
     @PutMapping("update-person")
