@@ -1,6 +1,9 @@
 package com.ups.oop.Service;
 
 import com.ups.oop.dto.Person;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,23 +13,41 @@ import java.util.List;
 public class PersonService {
     private List<Person> personList = new ArrayList<>();
 
-    public Person createPerson(Person person) {
-        personList.add(person);
-        return person;
+    public ResponseEntity createPerson(Person person) {
+        String personID = person.getId();
+        boolean wasFound = findPerson(personID);
+        if (wasFound){
+            String errorMessage = "Person with id " + personID +"Person already exists";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(errorMessage);
+        } else {
+            personList.add(person);
+            return ResponseEntity.status(HttpStatus.OK).body(person);
+        }
     }
 
-    public List<Person> getAllPeople() {
-        return personList;
+    public boolean findPerson(String ID) {
+     for (Person person : personList) {
+       if (person.getId().equals(ID)) {
+       return true;
+       }
+     }
+     return false;
     }
-
-    public Person getPersonById(String id) {
-        Person person = new Person();
+    public ResponseEntity getAllPeople() {
+        if(personList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person List NOT FOUND");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(personList);
+    }
+    public ResponseEntity getPersonById(String id){
         for (Person per : personList){
            if(id.equalsIgnoreCase(per.getId())){
-            return per;
+            return ResponseEntity.status(HttpStatus.OK).body(per);
           }
         }
-        return person;
+        String errorMessage ="person With id " + id + " not found";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
      public Person updatePerson(Person person) {
         Person per = new Person();
