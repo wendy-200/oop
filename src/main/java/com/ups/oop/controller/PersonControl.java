@@ -2,12 +2,8 @@ package com.ups.oop.controller;
 
 import com.ups.oop.dto.Person;
 import com.ups.oop.Service.PersonService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class PersonControl {
@@ -32,7 +28,7 @@ public class PersonControl {
         return this.personService.createPerson(person);
     }
     @PutMapping("update-person")
-    public Person updatePerson( @RequestBody Person person) {
+    public ResponseEntity updatePerson(@RequestBody Person person) {
         return this.personService.updatePerson(person);
     }
     @DeleteMapping("/remove-person")
