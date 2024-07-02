@@ -32,7 +32,7 @@ public class PersonControl {
         return this.personService.updatePerson(person);
     }
     @DeleteMapping("/remove-person")
-    public String deletePerson(@RequestParam String id){
+    public ResponseEntity deletePerson(@RequestParam String id){
         return this.personService.deletePersonById(id);
    }
 }
