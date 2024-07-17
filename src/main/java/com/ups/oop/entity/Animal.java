@@ -1,2 +1,4 @@
-package com.ups.oop.entity;public class Animal {
+package com.ups.oop.entity;
+
+public class Animal {
 }

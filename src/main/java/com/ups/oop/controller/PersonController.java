@@ -1,20 +1,21 @@
 package com.ups.oop.controller;
 
-import com.ups.oop.dto.Person;
+import com.ups.oop.dto.PersonDTO;
 import com.ups.oop.Service.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class PersonControl {
+public class PersonController {
     private final PersonService personService;
 
-    public PersonControl(PersonService personService) {
+    public PersonController( PersonService personService){
         this.personService = personService;
     }
 
+
     @GetMapping("/get-all-people")
-    public ResponseEntity getAllPeople() {
+    public ResponseEntity getAllPeople(){
         return this.personService.getAllPeople();
     }
 
@@ -24,16 +25,18 @@ public class PersonControl {
     }
 
     @PostMapping("/person")
-    public ResponseEntity createPerson(@RequestBody Person person) {
-        return this.personService.createPerson(person);
+    public ResponseEntity createPerson(@RequestBody PersonDTO personDTO){
+        return  this.personService.createPerson(personDTO);
     }
-    @PutMapping("update-person")
-    public ResponseEntity updatePerson(@RequestBody Person person) {
-        return this.personService.updatePerson(person);
+
+    @PutMapping("/update-person")
+    public ResponseEntity updatePerson(@RequestBody PersonDTO personDTO){
+        return this.personService.updatePerson(personDTO);
+
     }
-    @DeleteMapping("/remove-person")
+
+    @DeleteMapping("/removed-person")
     public ResponseEntity deletePerson(@RequestParam String id){
         return this.personService.deletePersonById(id);
-   }
+    }
 }
-
