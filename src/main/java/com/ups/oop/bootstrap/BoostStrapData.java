@@ -25,10 +25,10 @@ import org.springframework.stereotype.Component;
         p2.setPersonId("0982765490");
         p2.setName("Mabelle");
         p2.setLastname("Mideros");
-        p2.setAge(5);
-
+        p2.setAge(20);
         personRepository.save(p1);
         personRepository.save(p2);
+
 
 
 
