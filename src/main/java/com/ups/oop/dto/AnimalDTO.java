@@ -20,12 +20,5 @@ public class AnimalDTO {
     private double weight;
     private double height;
     private double length;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }
+
