@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class  PersonService {
     private final PersonRepository personRepository;
-
     private List<PersonDTO> personDTOList = new ArrayList<>();
 
     public PersonService(PersonRepository personRepository) {
@@ -43,8 +43,9 @@ public class  PersonService {
         Iterable<Person>personIterable = personRepository.findAll();
         List<PersonDTO> peopleList = new ArrayList<>();
 
+
         for(Person p: personIterable){
-            PersonDTO person = new PersonDTO(p.getPersonId(), p.getName(), p.getLastname(), p.getAge());
+            PersonDTO person = new PersonDTO(p.getPersonId(), p.getName() + "-" +p.getLastname(), p.getAge());
             peopleList.add(person);
         }
 
@@ -54,15 +55,22 @@ public class  PersonService {
         return ResponseEntity.status(HttpStatus.OK).body(peopleList);
     }
 
-    public ResponseEntity getPersonById(String id){
-        PersonDTO personDTO = new PersonDTO();
-        for(PersonDTO per: personDTOList) {
-            if(id.equalsIgnoreCase(per.getId())){
-                return ResponseEntity.status(HttpStatus.OK).body(per);
-            }
-        }
+    public ResponseEntity getPersonById(String personId){
+        //Optional<Person> personOptional = personRepository.findById(long.valueOf(id));
+        Optional<Person> personOptional = personRepository.findByPersonId(personId);
+        if(personOptional.isPresent()) {
+           //if record was found
+           Person personFound = personOptional.get();
+           PersonDTO person = new PersonDTO(personFound.getPersonId(),
+           personFound.getName() + "-" + personFound.getLastname(),
+                   personFound.getAge());
+           return ResponseEntity.status(HttpStatus.OK).body(person);
 
-        String errorMessage = "person with id" + id +  " already exists";
+       }else{
+           //if record wasn't found
+       }
+
+        String errorMessage = "person with id" + personId +  " doesn't exist :c";
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
 
@@ -99,3 +107,5 @@ public class  PersonService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " not found");
     }
 }
+
+
