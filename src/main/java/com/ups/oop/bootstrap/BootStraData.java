@@ -32,9 +32,13 @@ public class BootStraData implements CommandLineRunner {
         p2.setLastname("Mideros");
         p2.setAge(20);
 
+
+        personRepository.save(p1);
+        personRepository.save(p2);
+
+
         //Animals
         Animal a1 = new Animal();
-        a1.setAnimalId("0982765490");
         a1.setName("Bod");
         a1.setBread("Pitbull");
         a1.setColor("brown");
@@ -43,7 +47,6 @@ public class BootStraData implements CommandLineRunner {
         a1.setLength(3.3);
 
         Animal a2 = new Animal();
-        a2.setAnimalId("0945672967");
         a2.setName("Simba");
         a2.setBread("Leonberger");
         a2.setColor("black");
