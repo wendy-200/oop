@@ -1,6 +1,8 @@
 package com.ups.oop.Service;
 
+import com.ups.oop.dto.AnimalDTO;
 import com.ups.oop.dto.PersonDTO;
+import com.ups.oop.entity.Animal;
 import com.ups.oop.entity.Person;
 import com.ups.oop.repository.PersonRepository;
 import org.springframework.http.HttpStatus;
@@ -21,16 +23,32 @@ public class  PersonService {
     }
 
     public ResponseEntity createPerson(PersonDTO personDTO){
-        boolean wasFound = findPerson(personDTO.getId());
-        if(wasFound){
+        String personid = personDTO.getName();
+        Optional<Person>personOptional = personRepository.findByPersonId(personid);
+        if(personOptional.isPresent()){
             String errorMessage = "person with id" + personDTO.getId() + "already exists";
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
-        }else{
-            personDTOList.add(personDTO);
+        }else {
+        }
+           if (personDTO.getName().contains(" ")){
+            Person personRecord = new Person();
+            personRecord.setPersonId(personid);
+            String[] nameStrings = personDTO.getName()
+                    .split(" ");
+            String name = nameStrings[0];
+            String lastname = nameStrings[1];
+            personRecord.setName(name);
+            personRecord.setLastname(lastname);
+            personRecord.setAge(personDTO.getAge());
+            personRepository.save(personRecord);
             return ResponseEntity.status(HttpStatus.OK).body(personDTO);
+
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Person name must contrain two strings separated by a whitespace");
+
         }
     }
-    private boolean findPerson(String id){
+    private boolean findPerson (String id){
         for(PersonDTO personDTO : personDTOList){
             if(id.equalsIgnoreCase(personDTO.getId())){
                 return true;
@@ -55,9 +73,9 @@ public class  PersonService {
         return ResponseEntity.status(HttpStatus.OK).body(peopleList);
     }
 
-    public ResponseEntity getPersonById(String personId){
+    public ResponseEntity getPersonById(String personid){
         //Optional<Person> personOptional = personRepository.findById(long.valueOf(id));
-        Optional<Person> personOptional = personRepository.findByPersonId(personId);
+        Optional<Person> personOptional = personRepository.findByPersonId(personid);
         if(personOptional.isPresent()) {
            //if record was found
            Person personFound = personOptional.get();
@@ -70,7 +88,7 @@ public class  PersonService {
            //if record wasn't found
        }
 
-        String errorMessage = "person with id" + personId +  " doesn't exist :c";
+        String errorMessage = "person with id" + personid +  " doesn't exist :c";
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
 
