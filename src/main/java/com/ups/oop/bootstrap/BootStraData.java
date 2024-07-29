@@ -2,8 +2,10 @@ package com.ups.oop.bootstrap;
 
 import com.ups.oop.entity.Animal;
 import com.ups.oop.entity.Person;
+import com.ups.oop.entity.Student;
 import com.ups.oop.repository.AnimalRepository;
 import com.ups.oop.repository.PersonRepository;
+import com.ups.oop.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Component;
 public class BootStraData implements CommandLineRunner {
     private final PersonRepository personRepository;
     private final AnimalRepository animalRepository;
+    private final StudentRepository studentRepository;
 
-    public BootStraData(PersonRepository personRepository, AnimalRepository animalRepository) {
+    public BootStraData(PersonRepository personRepository, AnimalRepository animalRepository, StudentRepository studentRepository) {
         this.personRepository = personRepository;
         this.animalRepository = animalRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -54,12 +58,32 @@ public class BootStraData implements CommandLineRunner {
         a2.setHeight(2.2);
         a2.setLength(3.2);
 
+
         animalRepository.save(a1);
         animalRepository.save(a2);
+
+
+        // Students
+
+        Student s1 = new Student();
+        s1.setStudentId("0978457891");
+        s1.setName("Sol");
+        s1.setLastname("Paéz");
+        s1.setAge(15);
+
+        Student s2 = new Student();
+        s1.setStudentId("0958794859");
+        s1.setName("Angel");
+        s1.setLastname("Sarmiento");
+        s1.setAge(25);
+
+        studentRepository.save(s1);
+        studentRepository.save(s2);
 
         System.out.println("--------Started BootstrapData-------- ");
         System.out.println("Number of Person: " + personRepository.count());
         System.out.println("Number of animal: " + animalRepository.count());
+        System.out.println("Number of student:" + studentRepository.count());
 
 
     }
