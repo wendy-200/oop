@@ -2,6 +2,7 @@ package com.ups.oop.Service;
 
 import com.ups.oop.dto.AnimalDTO;
 import com.ups.oop.dto.StudentDTO;
+import com.ups.oop.entity.Person;
 import com.ups.oop.entity.Student;
 import com.ups.oop.repository.StudentRepository;
 import org.springframework.http.HttpStatus;
@@ -15,26 +16,25 @@ import java.util.Optional;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-    private List<StudentDTO>studentDTOList = new ArrayList<>();
+    private List<StudentDTO> studentDTOList = new ArrayList<>();
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     public ResponseEntity createStudent(StudentDTO studentDTO) {
-        // Verificar si el estudiante ya existe
-        Optional<Student> existingStudent = studentRepository.findByStudentId(studentDTO.getId());
-        if (existingStudent.isPresent()) {
+        String studentid = studentDTO.getName();
+        Optional<Student> studentOptional = studentRepository.findByStudentId(studentDTO.getId());
+        if (studentOptional.isPresent()) {
             String errorMessage = "Student with id " + studentDTO.getId() + " already exists";
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
         } else {
-            // Crear nuevo estudiante
-            Student student = new Student();
-            student.setStudentId(studentDTO.getId());
+c            Student student = new Student();
+            student.setStudentCode(studentDTO.getId());
             student.setName(studentDTO.getName());
-            student.setLastname(studentDTO.getLastname());
-            student.setAge(studentDTO.getAge());
             studentRepository.save(student);
+            student.setLastname(studentDTO.getLastname());
+
             return ResponseEntity.status(HttpStatus.OK).body(studentDTO);
         }
     }
@@ -42,11 +42,12 @@ public class StudentService {
     public ResponseEntity getAllStudents() {
         Iterable<Student> students = studentRepository.findAll();
         List<StudentDTO> studentDTOList = new ArrayList<>();
+
+
         for (Student student : students) {
             StudentDTO studentDTO = new StudentDTO();
-            studentDTO.setId(student.getStudentId());
+            studentDTO.setId(student.getStudentCode());
             studentDTO.setName(student.getName() + " " + student.getLastname());
-            studentDTO.setAge(student.getAge());
             studentDTOList.add(studentDTO);
         }
 
@@ -61,9 +62,8 @@ public class StudentService {
         if (studentOptional.isPresent()) {
             Student studentFound = studentOptional.get();
             StudentDTO studentDTO = new StudentDTO();
-            studentDTO.setId(studentFound.getStudentId());
+            studentDTO.setId(studentFound.getStudentCode());
             studentDTO.setName(studentFound.getName() + " " + studentFound.getLastname());
-            studentDTO.setAge(studentFound.getAge());
             return ResponseEntity.status(HttpStatus.OK).body(studentDTO);
 
         } else {
@@ -87,22 +87,40 @@ public class StudentService {
     }
 
     public ResponseEntity updateStudent(StudentDTO studentDTO) {
-        int upadateIndex = findIndexById(studentDTO.getId());
-        if (upadateIndex != -1) {
-            studentDTOList.set(upadateIndex, studentDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(studentDTO);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("student with id " + studentDTO.getId() + " doesn't exits ");
+        String studentId = studentDTO.getId();
+        Optional<Student> studentOptional = studentRepository.findByStudentId(studentId);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
 
-    }
-    public ResponseEntity deleteStudentById(String id) {
-        String message = "student with id " + id;
-        for (StudentDTO ani : studentDTOList) {
-            if (id.equalsIgnoreCase(ani.getId())) {
-                studentDTOList.remove(ani);
-                return ResponseEntity.status(HttpStatus.OK).body(message + " removed successfully");
+            if (studentDTO.getName().contains(" ")) {
+                student.setStudentCode(studentId);
+                String[] nameStrings = studentDTO.getName().split(" ");
+                String name = nameStrings[0];
+                String lastname = nameStrings[1];
+                student.setName(name);
+                student.setLastname(lastname);
+                studentRepository.save(student);
+                return ResponseEntity.status(HttpStatus.OK).body(student);
+
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Student name must contain two strings separated by a whitespace");
+
             }
+        } else {
+            String errorMessage = "Student with id " + studentId + " not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " not found");
+    }
+
+    public ResponseEntity deleteStudentById(String id) {
+        String message = "Student with id " + id;
+        Optional<Student> studentOptional = studentRepository.findByStudentId(id);
+        if (studentOptional.isPresent()) {
+            studentRepository.delete(studentOptional.get());
+            return ResponseEntity.status(HttpStatus.OK).body(message + " removed successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " not found");
+
+        }
     }
 }

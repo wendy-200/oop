@@ -66,16 +66,14 @@ public class BootStraData implements CommandLineRunner {
         // Students
 
         Student s1 = new Student();
-        s1.setStudentId("0978457891");
+        s1.setStudentCode("0978457891");
         s1.setName("Sol");
         s1.setLastname("Paéz");
-        s1.setAge(15);
 
         Student s2 = new Student();
-        s1.setStudentId("0958794859");
+        s1.setStudentCode("0958794859");
         s1.setName("Angel");
         s1.setLastname("Sarmiento");
-        s1.setAge(25);
 
         studentRepository.save(s1);
         studentRepository.save(s2);
