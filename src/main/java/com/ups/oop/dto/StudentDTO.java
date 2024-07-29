@@ -14,10 +14,6 @@ import lombok.ToString;
 
 public class StudentDTO {
     private String id;
-    private String StudentCode;
-    private String lastname;
     private String name;
-    private Integer age;
-
 
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sample Template</title>
+    <style>
+        table ,th, th {
+        border: 1px solid black;
+        border-collapse: collapse
+        }
+
+        tbody tr: nth-child(odd) {
+        bockground: lightblue;
+
+        th {
+        background-color: lightgreen:
+        padding: 10px
+        width: 150px;
+
+        }
+        tr: hover{
+         box-shadow: 0px 2px 0px rgba(0,0,0,0.5);
+         cursor: pointer;
+
+        td {
+
+        padding: 10px
+
+        }
+    </style>
+</head>
+<body>
+  <h2>List of People</h2>
+<br>
+<table>
+    <tr>
+    <th>Id</th>
+    <th>Name</th>
+        <th>Age</th>
+    </tr>
+
+    <tr>
+        <th>0985658945</th>
+        <th>Wendy</th>
+        <th>18</th>
+    </tr>
+
+    <tr>
+        <th>0956452514</th>
+        <th>Mia</th>
+        <th>15</th>
+    </tr>
+
+    <tr>
+        <th>0958945612</th>
+        <th>Valentino</th>
+        <th>10</th>
+    </tr>
+
+
+    <tr>
+        <th>0925458956</th>
+        <th>Mar</th>
+        <th>20</th>
+    </tr>
+    </table>
+</body>
+</html>
