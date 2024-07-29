@@ -1,67 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sample Template</title>
+    <title>People List</title>
     <style>
-        table ,th, th {
+        table,
+
+        th, td {
         border: 1px solid black;
-        border-collapse: collapse
+        border-collapse:collapse;
         }
 
         tbody tr: nth-child(odd) {
-        bockground: lightblue;
+        background: lightblue;
+        }
 
         th {
-        background-color: lightgreen:
-        padding: 10px
+         background-color: lightgreen;
         width: 150px;
-
+        padding: 10px;
         }
+
         tr: hover{
-         box-shadow: 0px 2px 0px rgba(0,0,0,0.5);
+         box-shadow:0px 2px 0px rgba(0,0,0,0.5);
          cursor: pointer;
 
         td {
 
-        padding: 10px
+        padding:10px;
 
         }
     </style>
 </head>
 <body>
   <h2>List of People</h2>
-<br>
-<table>
-    <tr>
-    <th>Id</th>
-    <th>Name</th>
+  <br>
+   <table>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
         <th>Age</th>
     </tr>
 
     <tr>
-        <th>0985658945</th>
-        <th>Wendy</th>
-        <th>18</th>
+        <td>0985658945</td>
+        <td>Wendy</td>
+        <td>18</td>
     </tr>
 
     <tr>
-        <th>0956452514</th>
-        <th>Mia</th>
-        <th>15</th>
+        <td>0956452514</td>
+        <td>Mia</td>
+        <td>15</td>
     </tr>
 
     <tr>
-        <th>0958945612</th>
-        <th>Valentino</th>
-        <th>10</th>
+        <td>0958945612</td>
+        <td>Valentino</td>
+        <td>10</td>
     </tr>
 
 
     <tr>
-        <th>0925458956</th>
-        <th>Mar</th>
-        <th>20</th>
+        <td>0925458956</td>
+        <td>Mar</td>
+        <td>20</td>
     </tr>
+
     </table>
+
 </body>
+
 </html>

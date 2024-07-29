@@ -1,22 +1,19 @@
 package com.ups.oop.controller;
 
 import com.ups.oop.dto.StudentDTO;
-import com.ups.oop.Service.StudentService;
+import com.ups.oop.service.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 public class StudentController {
-    private final StudentService  studentService;
+    private final StudentService studentService;
 
     public StudentController( StudentService studentService){
         this.studentService = studentService;
     }
-
-
-    @GetMapping("/get-all-students")
-    public ResponseEntity getAllPeople(){
-        return this.studentService.getAllStudents();
+    @GetMapping("/get-all-student")
+    public ResponseEntity getAllStudent(){
+        return this.studentService.getAllStudent();
     }
 
     @GetMapping("/get-student")
@@ -39,4 +36,5 @@ public class StudentController {
     public ResponseEntity deleteStudent(@RequestParam String id){
         return this.studentService.deleteStudentById(id);
     }
+
 }
