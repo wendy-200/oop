@@ -12,11 +12,12 @@ import lombok.ToString;
 @Getter
 @Setter
 
-public class PersonDTO extends StudentDTO {
+public class StudentDTO {
     private String id;
+    private String StudentCode;
+    private String lastname;
     private String name;
     private Integer age;
-
 
 
 }
