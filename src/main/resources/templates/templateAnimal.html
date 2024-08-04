@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Amimals List</title>
+    <style>
+        table,
+
+        th, td {
+        border: 1px solid black;
+        border-collapse:collapse;
+        }
+
+        tbody tr: nth-child(odd) {
+        background: lightblue;
+        }
+
+        th {
+         background-color: lightgreen;
+        width: 150px;
+        padding: 10px;
+        }
+
+        tr: hover{
+         box-shadow:0px 2px 0px rgba(0,0,0,0.5);
+         cursor: pointer;
+
+        td {
+
+        padding:10px;
+
+        }
+    </style>
+</head>
+<body>
+<h2>List of Animals</h2>
+<br>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Bread</th>
+        <th>Color</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>Lenght</th>
+
+
+    </tr>
+
+    <tr>
+        <td>Bod</td>
+        <td>Pitbull</td>
+        <td>Brown</td>
+        <td>20.1</td>
+        <td>3.2</td>
+        <td>3.3</td>
+
+
+    </tr>
+
+    <tr>
+        <td>Simba</td>
+        <td>Leonberger</td>
+        <td>black</td>
+        <td>11.3</td>
+        <td>2.2</td>
+        <td>3.2</td>
+
+    </tr>
+
+    <tr>
+        <td>Lucas</td>
+        <td>Labrador</td>
+        <td>white with black</td>
+        <td>16.6</td>
+        <td>4.1</td>
+        <td>4.3</td>
+
+
+    </tr>
+
+
+    <tr>
+        <td>Frank</td>
+        <td>Wolfdog</td>
+        <td>white with black</td>
+        <td>20.8</td>
+        <td>3.6</td>
+        <td>6.7</td>
+
+    </tr>
+
+</table>
+
+</body>
+
+</html>
