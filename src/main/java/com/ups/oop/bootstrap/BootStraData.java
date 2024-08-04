@@ -58,9 +58,28 @@ public class BootStraData implements CommandLineRunner {
         a2.setHeight(2.2);
         a2.setLength(3.2);
 
+        Animal a3 = new Animal();
+        a3.setName("Lucas");
+        a3.setBread("Labrador");
+        a3.setColor("white with black");
+        a3.setWeight(16.6);
+        a3.setHeight(4.1);
+        a3.setLength(4.3);
+
+        Animal a4 = new Animal();
+        a4.setName("Frank");
+        a4.setBread("Wolfdog");
+        a4.setColor("white with black");
+        a4.setWeight(20.8);
+        a4.setHeight(3.6);
+        a4.setLength(6.7);
+
 
         animalRepository.save(a1);
         animalRepository.save(a2);
+        animalRepository.save(a3);
+        animalRepository.save(a4);
+
 
 
         // Students
