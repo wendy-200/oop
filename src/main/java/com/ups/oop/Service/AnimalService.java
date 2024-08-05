@@ -47,6 +47,7 @@ public class AnimalService {
         for (Animal a : animalIterable) {
             AnimalDTO animal = new AnimalDTO();
                     animal.setAnimalCode(a.getName()+ "-" + a.getBread() + "-"+ a.getColor());
+                    animal.setPetName(a.getPetName());
                     animal.setWeight(a.getWeight());
                     animal.setLength(a.getLength());
                     animal.setHeight(a.getHeight());
@@ -69,6 +70,9 @@ public class AnimalService {
             animal.setWeight(animalFound.getWeight());
             animal.setHeight(animalFound.getHeight());
             animal.setWeight(animalFound.getHeight());
+            animal.setPetName(animalFound.getPetName());
+
+
             return  ResponseEntity.status(HttpStatus.OK).body(animal);
 
         }else{
