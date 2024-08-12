@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public class PersonService {
-    private final PersonRepository personRepository;
+    private static PersonRepository personRepository;
     private List<PersonDTO> personDTOList = new ArrayList<>();
 
     public PersonService(PersonRepository personRepository) {
@@ -59,7 +59,7 @@ public class PersonService {
         return false;
     }
 
-    public ResponseEntity getAllPeople() {
+    public static ResponseEntity getAllPeople() {
         Iterable<Person> personIterable = personRepository.findAll();
         List<PersonDTO> peopleList = new ArrayList<>();
 
