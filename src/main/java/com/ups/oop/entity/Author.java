@@ -19,7 +19,6 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    // private String authorId;
     private String name;
     private String lastname;
     @OneToMany(mappedBy = "author")

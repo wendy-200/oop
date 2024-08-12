@@ -108,13 +108,13 @@ public class BootStraData implements CommandLineRunner {
         //Book
 
         Author au1 = new Author();
-        au1.setName("Akira");
-        au1.setLastname("dumas");
+        au1.setName("Alejandro");
+        au1.setLastname("Dumas");
         authorRepository.save(au1);
 
         Book b1 = new Book();
-        b1.setTitle("Conde dracula");
-        b1.setEditorial("daniel");
+        b1.setTitle("El libro sin nombre ");
+        b1.setEditorial("Dumas");
         b1.setAuthor(au1);
         bookRepository.save(b1);
 
@@ -122,32 +122,51 @@ public class BootStraData implements CommandLineRunner {
         authorRepository.save(au1);
 
         Author au2 = new Author();
-        au2.setName("Akira");
-        au2.setLastname("dumas");
+        au2.setName("Luis ");
+        au2.setLastname("Alvarez");
         authorRepository.save(au2);
 
         Book b2 = new Book();
-        b2.setTitle("bella");
-        b2.setEditorial("akira");
+        b2.setTitle("Crimen del castigo");
+        b2.setEditorial("Alvarez");
         b2.setAuthor(au2);
         bookRepository.save(b2);
 
         au2.getBooks().add(b2);
         authorRepository.save(au2);
 
-        Author au3= new Author();
-        au3.setName("");
-        au3.setLastname("dumas");
+
+        Author au3 = new Author();
+        au3.setName("Maria");
+        au3.setLastname("Gonzales");
         authorRepository.save(au3);
+
 
         Book b3 = new Book();
-        b3.setTitle("J.K");
-        b3.setEditorial("damian");
-        b3.setAuthor(au3);
+        b3.setTitle("Asi empezo todo");
+        b3.setEditorial("Gonzalez ");
+        b3.setAuthor(au1);
         bookRepository.save(b3);
 
-        au3.getBooks().add(b3);
-        authorRepository.save(au3);
+        au1.getBooks().add(b1);
+        au1.getBooks().add(b3);
+        authorRepository.save(au1);
+
+
+        Author au4= new Author();
+        au4.setName("Laura ");
+        au4.setLastname("Ortiz");
+        authorRepository.save(au4);
+
+        Book b4 = new Book();
+        b4.setTitle("Donde el corazon te lleve");
+        b4.setEditorial("Ortiz");
+        b4.setAuthor(au1);
+        bookRepository.save(b4);
+
+        au4.getBooks().add(b4);
+        authorRepository.save(au4);
+
 
 
         System.out.println("--------Started BootstrapData-------- ");
