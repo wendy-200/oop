@@ -12,15 +12,18 @@ public class BootStraData implements CommandLineRunner {
     private final StudentRepository studentRepository;
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final ClientRepository clientRepository;
 
 
 
-    public BootStraData(PersonRepository personRepository, AnimalRepository animalRepository, StudentRepository studentRepository, AuthorRepository authorRepository, BookRepository bookRepository) {
+    public BootStraData(PersonRepository personRepository, AnimalRepository animalRepository, StudentRepository studentRepository,
+                        AuthorRepository authorRepository, BookRepository bookRepository, ClientRepository clientRepository) {
         this.personRepository = personRepository;
         this.animalRepository = animalRepository;
         this.studentRepository = studentRepository;
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.clientRepository = clientRepository;
     }
 
     @Override
@@ -168,6 +171,19 @@ public class BootStraData implements CommandLineRunner {
         authorRepository.save(au4);
 
 
+        public void createClients(){
+            Client.client c1 = new Client("c-00001", "0932467913", "Wendy", "Ortiz", age 18);
+            Client.client c2= new Client("c-00002", "0982765490" , "Pedro", "Rivera", age 20);
+            clientRepository.save(c1);
+            clientRepository.save(c2);
+        }
+        @Override
+        public void run (String...... args) throws{
+            createPeople();
+            createAnimals();
+            createBooksAndAuthors();
+            createClients();
+
 
         System.out.println("--------Started BootstrapData-------- ");
         System.out.println("Number of Person: " +personRepository.count());
@@ -175,6 +191,7 @@ public class BootStraData implements CommandLineRunner {
         System.out.println("Number of Student: " +studentRepository.count());
         System.out.println("Number of author: " + authorRepository.count());
         System.out.println("Number of book: " +   bookRepository.count());
+        System.out.println(" Number of client:" + clientRepository.count());
 
 
     }
